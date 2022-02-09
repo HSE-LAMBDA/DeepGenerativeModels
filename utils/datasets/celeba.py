@@ -69,51 +69,11 @@ class CelebADataset(Dataset):
         # Get the path to the image 
         img_name = self.filenames[idx]
         img_path = os.path.join(self.dataset_folder, img_name)
-        img_attributes = [{-1:0, 1:1}[v] for v in self.annotations[idx]] # convert all attributes to zeros and ones
-        target = torch.tensor(img_attributes).float()
+        img_attributes = self.annotations[idx] # convert all attributes to zeros and ones
         # Load image and convert it to RGB
         img = Image.open(img_path).convert('RGB')
         # Apply transformations to the image
         if self.transform:
             img = self.transform(img)
-        return img, {'target': target, 'filename': img_name, 'idx': idx}
+        return img, {'filename': img_name, 'idx': idx, 'attributes': torch.tensor(img_attributes).long()}
     
-    
-## Create a custom Dataset class
-class CelebAReferenceDataset(CelebADataset):
-    def __init__(self, root_dir=os.path.join(CUR_DIR, '../../data/celeba'), transform=None):
-        super().__init__(root_dir, transform)
-        self.filename1 = []
-        self.filename2 = []
-        self.domain = []
-        self.domain_names = self.header
-        for domain_idx, domain in enumerate(self.domain_names):
-            domain_indices_1 = np.argwhere(self.annotations[:, domain_idx]>0).squeeze()
-            domain_indices_2 = np.argwhere(self.annotations[:, domain_idx]<0).squeeze()
-            for idx1, idx2 in zip(domain_indices_1, np.random.choice(domain_indices_2, len(domain_indices_1))):
-                self.filename1.append(self.filenames[idx1])
-                self.filename2.append(self.filenames[idx2])
-                self.domain.append(domain_idx)
-            for idx1, idx2 in zip(domain_indices_2, np.random.choice(domain_indices_1, len(domain_indices_2))):
-                self.filename1.append(self.filenames[idx1])
-                self.filename2.append(self.filenames[idx2])
-                self.domain.append(domain_idx)
-            
-            
-    def __len__(self):
-        return len(self.domain)
-    
-    def __getitem__(self, idx):
-        # Get the path to the image 
-        
-        domain_idx = self.domain[idx]
-        domain_name = self.domain_names[domain_idx]
-        img_name1, img_name2 = self.filename1[idx], self.filename2[idx]
-        img_path1, img_path2 = [os.path.join(self.dataset_folder, img_name) for img_name in [img_name1, img_name2]]
-        
-        # Load image and convert it to RGB
-        img1, img2 = [Image.open(img_path).convert('RGB') for img_path in [img_path1, img_path2]]
-        # Apply transformations to the image
-        if self.transform:
-            img1, img2 = [self.transform(img) for img in [img1, img2]]
-        return img1, img2, {'domain': domain_idx, 'domain_name': domain_name, 'filename1': img_name1, 'filename2': img_name2, 'idx': idx}
