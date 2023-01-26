@@ -9,7 +9,7 @@ Seminars: Artem Ryzhikov, Sergei Popov
 Assistents: Lukia Mistryukova
 
 
-TG: t (dot) me (slash) joinchat (slash) +b6hwenMAUN43ZTgy
+TG: t (dot) me (slash) joinchat (slash) +m1_Wvk4e7kxkNDZi
 
 Anytask: 1000
 
