@@ -4,13 +4,12 @@ Course for the students of HSE University AMI program [Moscow](https://www.hse.r
 
 Lecture: Denis Derkach
 
-Seminars: Maksim Artemev, Artem Ryzhikov
+Seminars: Artem Ryzhikov, Sergei Popov
 
-Assistents: Aleksander Markovich, Sergey Chervontsev
+Assistents: Lukia Mistryukova
 
-Notion: https://www.notion.so/mrartemevstudents/Generative-models-HSE-4ba9fa3db4f341d98cfa2bfe2c04ad1f
 
-TG: t (dot) me (slash) joinchat (slash) SKbwZxvozFwsT8ce
+TG: t (dot) me (slash) joinchat (slash) +b6hwenMAUN43ZTgy
 
-Anytask: 775
+Anytask: 1000
 
