@@ -6,7 +6,7 @@ Lecture: Denis Derkach
 
 Seminars: Artem Ryzhikov, Sergei Popov
 
-Assistents: Lukia Mistryukova
+Assistents: Lukia Mistryukova, Nazar Pogosskiy
 
 
 TG: t (dot) me (slash) joinchat (slash) +m1_Wvk4e7kxkNDZi
