@@ -4,7 +4,8 @@ Course for the students of HSE University AMI/DSBA/MCS programmes [Moscow](https
 
 Lecture: Denis Derkach
 
-Seminars AMU: Artem Ryzhikov, Sergei Popov, Fedor Buzaev
+Seminars AMI: Artem Ryzhikov, Sergei Popov, Fedor Buzaev
+
 Seminars DSBA: Tigran Ramazyan
 
 Instructors: TBD
