@@ -1,3 +1,0 @@
-[submodule "seminars/nanoGPT"]
-	path = seminars/seminar-9-gpt
-	url = https://github.com/karpathy/nanoGPT

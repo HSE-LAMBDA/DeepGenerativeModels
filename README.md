@@ -2,16 +2,11 @@
 
 Course for the students of HSE University AMI/DSBA/MCS programmes [Moscow](https://www.hse.ru/en/ba/ami/) and [Saint-Petersburg](https://spb.hse.ru/en/ba/appmath/) campuses, and [Yandex School of Data Analysis](https://yandexdataschool.com/). 
 
-Lecture: Denis Derkach
+Lectures: Artem Ryzhikov
 
-Seminars AMI: Artem Ryzhikov, Sergei Popov, Fedor Buzaev
+Seminars: Saraa Ali, Anna Akhmatova, Tigran Ramazyan
 
-Seminars DSBA: Tigran Ramazyan
+Assistants:  Fakhriddin Tojiboev, Emil Sataev, Karim, Nikita Aksenov
 
-Instructors: TBD
-
-TG AMI: +dear3dciXPBmNWUy
-TG DSBA: +wBWhENdpkC9hNTli
-
-Anytask: TBD
+TG: t (dot) me (slash) joinchat (slash) +NJZ-iaSj3pdkNWRi
 
