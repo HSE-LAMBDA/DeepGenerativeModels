@@ -4,9 +4,9 @@ Course for the students of HSE University AMI/DSBA/MCS programmes [Moscow](https
 
 Lectures: Artem Ryzhikov
 
-Seminars: Saraa Ali, Anna Akhmatova, Tigran Ramazyan
+Seminars: Saraa Ali, Anna Akhmatova, Tigran Ramazyan, Karim Aithadzhaev
 
-Assistants:  Fakhriddin Tojiboev, Emil Sataev, Karim, Nikita Aksenov
+Assistants:  Fakhriddin Tojiboev, Emil Sataev, Nikita Aksenov
 
 TG: t (dot) me (slash) joinchat (slash) +NJZ-iaSj3pdkNWRi
 
