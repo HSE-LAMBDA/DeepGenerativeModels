@@ -1,14 +1,16 @@
 # Deep Generative Models
 
-Course for the students of HSE University DSBA programme [Moscow](https://www.hse.ru/en/ba/data/) 
+Course for the students of HSE University AMI/DSBA/MCS programmes [Moscow](https://www.hse.ru/en/ba/ami/) and [Saint-Petersburg](https://spb.hse.ru/en/ba/appmath/) campuses, and [Yandex School of Data Analysis](https://yandexdataschool.com/). 
 
 Lecture: Denis Derkach
 
-Seminars DSBA: Anwar Ibrahim, Tigran Ramazyan
+Seminars AMI: Artem Ryzhikov, Sergei Popov, Fedor Buzaev
 
-Instructors: Muhammad Hashaam
+Seminars DSBA: Tigran Ramazyan
 
-TG DSBA: +Cf2ucuORsK8yZTA0
+Instructors: TBD
 
-Anytask: 5ve2ICD XzaxKrR
+TG AMI: +dear3dciXPBmNWUy
+TG DSBA: +wBWhENdpkC9hNTli
 
+Anytask: TBD
