@@ -6,6 +6,4 @@ Lectures: Artem Ryzhikov
 
 Seminars: Aleksandr Khizhik
 
-Assistents: Fakhriddin Tojiboev, Emil Sataev, Karim, Nikita Aksenov
-
-TG: t (dot) me (slash) joinchat (slash) +NJZ-iaSj3pdkNWRi
+Assistents: Mariia Rubanenko
