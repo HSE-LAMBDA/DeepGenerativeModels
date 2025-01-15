@@ -5,7 +5,7 @@ This seminar folder contains the materials for the first seminar of our Deep Gen
 ## Seminar Overview
 
 - **Topic**: Introduction to Autoencoders (AEs)
-- **Goal**: Understand how AEs learn a compressed representation of data by reconstructing the original input from a lower-dimensional latent space.
+- **Goal**: Understand how AEs learn a compressed representation of data by reconstructing the original input from a lower-dimensional **latent space**.
 - **Variants Covered**:
   1. Simple Autoencoder
   2. Denoising Autoencoder (DAE)
@@ -18,15 +18,16 @@ The accompanying Jupyter notebook (`autoencoders.ipynb`) explores these architec
 
 ## Key Concepts
 
-1. **Encoder**: Maps input $x$ to a latent representation $z$.
-2. **Decoder**: Maps the latent representation $z$ back to the original space to reconstruct $\hat{x}$.
-3. **Loss Functions**:
-   - **MSE (Mean Squared Error)**: Common for real-valued data.
-   - **BCE/Logits**: Often used for binary or $[0,1]$-scaled data (like MNIST).
-4. **Denoising**: Learn to reconstruct the *clean* image from *noisy* inputs, enhancing feature extraction.
-5. **Sparse Regularization**: Encourages the autoencoder to learn minimal, distinct feature activations, often via:
-   - **KL Divergence** (on intermediate activations)
-   - **L1 penalty** (on latent representations)
+1. **Latent Space**: A lower-dimensional hidden representation (often $\mathbf{z}$) where the essential features of the input $\mathbf{x}$ are captured. Learning this space is at the core of autoencoders, enabling **dimensionality reduction** and **feature extraction**.
+2. **Encoder**: A neural network module that maps the input $\mathbf{x}$ to a latent representation $\mathbf{z}$ in the latent space.
+3. **Decoder**: A network module that reconstructs $\hat{\mathbf{x}}$ from the latent code $\mathbf{z}$, ideally recovering the original input.
+4. **Loss Functions**:
+   - **MSE (Mean Squared Error)**: A common choice for real-valued data reconstruction.
+   - **BCE / Logits**: Often used for binary or $[0,1]$-scaled data (like MNIST).
+5. **Denoising**: An approach in which the input is corrupted with noise, and the model learns to reconstruct the clean version, promoting more robust feature representations.
+6. **Sparse Regularization**: Encourages the autoencoder to learn minimal, distinct feature activations, commonly through:
+   - **KL Divergence** (on intermediate activations), or
+   - **L1 penalty** (on latent representations).
 
 ## Useful Links
 
