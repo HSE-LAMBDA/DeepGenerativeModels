@@ -34,3 +34,4 @@ The accompanying Jupyter notebook (`autoencoders.ipynb`) explores these architec
 - **t-SNE** (scikit-learn): https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html
 - **MNIST** dataset: http://yann.lecun.com/exdb/mnist/
 - Bank, D., Koenigstein, N., Giryes, R. (2023). **Autoencoders**. In: Rokach, L., Maimon, O., Shmueli, E. (eds) Machine Learning for Data Science Handbook. Springer, Cham. https://arxiv.org/abs/1211.4246
+- https://www.jeremyjordan.me/autoencoders/
