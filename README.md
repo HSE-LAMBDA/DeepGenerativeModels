@@ -1,12 +1,12 @@
 # Deep Generative Models
 
-Course for the students of HSE University AMI program [Moscow](https://www.hse.ru/en/ba/ami/) and [Saint-Petersburg](https://spb.hse.ru/en/ba/appmath/) campuses, and [Yandex School of Data Analysis](https://yandexdataschool.com/). 
+This repository contains materials for the Deep Generative Models course taught at the [Faculty of Computer Science](https://cs.hse.ru/en/) of [HSE University](https://www.hse.ru/en/) and [Yandex School of Data Analysis](https://dataschool.yandex.com/).
 
 Lectures: Artem Ryzhikov
 
 Seminars: Aleksandr Khizhik
 
-Assistents: Mariia Rubanenko
+Assistants: Mariia Rubanenko
 
 ## Grading
 
