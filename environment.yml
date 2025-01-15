@@ -1,0 +1,29 @@
+name: py311_dgm
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - tqdm
+  # Data Analysis
+  - scipy
+  - numpy
+  - pandas
+  - pyarrow
+  - fastparquet
+  # Plotting
+  - matplotlib
+  - seaborn
+  # Machine learning
+  - scikit-learn
+  # Deep Learning
+  - pytorch::pytorch
+  - torchvision 
+  - torchaudio
+  # Jupyter Environment
+  - ipykernel
+  - jupyterlab
+  - jupyter
+  - ipywidgets
+  - nb_conda_kernels

@@ -4,9 +4,8 @@ Course for the students of HSE University AMI program [Moscow](https://www.hse.r
 
 Lectures: Artem Ryzhikov
 
-Seminars: Alexander Khizhik
+Seminars: Aleksandr Khizhik
 
 Assistents: Fakhriddin Tojiboev, Emil Sataev, Karim, Nikita Aksenov
-
 
 TG: t (dot) me (slash) joinchat (slash) +NJZ-iaSj3pdkNWRi
