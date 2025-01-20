@@ -21,7 +21,9 @@ The accompanying Jupyter notebook (`02_gans.ipynb`) explores these architectures
    - Introduced by Ian Goodfellow et al. (2014).
    - Consist of a **Generator** $G$ and a **Discriminator** $D$.
    - **Min-Max Objective**:  
-     $$\min_G \max_D \; \mathcal{L}(G, D) = \mathbb{E}_{x \sim p_\text{data}}[\log D(x)] \;+\; \mathbb{E}_{z \sim p_z}[\log (1 - D(G(z)))]$$
+     \[
+     \min_G \max_D \; \mathcal{L}(G, D) = \mathbb{E}_{x \sim p_\text{data}}[\log D(x)] \;+\; \mathbb{E}_{z \sim p_z}[\log (1 - D(G(z)))]
+     \]
    - The **Generator** learns to produce data that appear “real,” while the **Discriminator** learns to distinguish real data from generated (fake) data.
 
 2. **Unconditional GAN**:
