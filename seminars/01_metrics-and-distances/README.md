@@ -5,9 +5,6 @@ This seminar covers:
 - Common metrics to measure the quality of generative models:
   - *Inception Score (IS)*  
   - *Fréchet Inception Distance (FID)*  
-  <!-- - *Modified FID / MiFID*   -->
-  <!-- - *Sliced Wasserstein metrics*  
-  - *Gromov–Wasserstein distance*   -->
 - How to build or adapt a metric for a custom task.
 
 Two main notebooks are provided:
