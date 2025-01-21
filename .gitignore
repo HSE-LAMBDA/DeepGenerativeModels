@@ -625,3 +625,5 @@ FodyWeavers.xsd
 
 seminars/01_seminar_autoencoders/mnist_root
 seminars/data
+seminars/02_GAN/weights/*
+!seminars/02_GAN/weights/.gitkeep
