@@ -11,7 +11,7 @@ This seminar folder contains the materials for the second seminar of our Deep Ge
   2. **Conditional GAN** (cGAN) with label embeddings
   3. **f-GAN** (generalized framework using different f-divergences)
 
-The accompanying Jupyter notebook (`02_gans.ipynb`) explores these architectures using:
+The accompanying Jupyter notebook (`GANs.ipynb`) explores these architectures using:
 1. **MNIST** (focusing on digit "0") for Unconditional and f-GAN examples.
 2. **CIFAR100** (for cGAN) to demonstrate label-conditioned generation.
 
