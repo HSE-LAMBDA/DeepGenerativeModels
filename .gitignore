@@ -614,7 +614,7 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
-*.sln.iml
+*.sln.imlƒ
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
@@ -628,3 +628,5 @@ seminars/02_GAN/weights/*
 !seminars/02_GAN/weights/.gitkeep
 seminars/data/*
 !seminars/data/.gitkeep
+homeworks/data/*
+!homeworks/data/.gitkeep
