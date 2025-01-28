@@ -10,3 +10,8 @@ Assistants:  Fakhriddin Tojiboev, Emil Sataev, Nikita Aksenov
 
 TG: t (dot) me (slash) joinchat (slash) +NJZ-iaSj3pdkNWRi
 
+Anytask Invite Code (шорт): 
+
+group1:  y4dY16Q
+group2:  yEpeBEP
+group3:  2qrNquI
