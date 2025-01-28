@@ -1,6 +1,6 @@
 # Seminar 00: Autoencoders
 
-This seminar folder contains the materials for the first seminar of our Deep Generative Models course, dedicated to **Autoencoders**. 
+This seminar folder contains the materials for the zeroth seminar of our Deep Generative Models course, dedicated to **Autoencoders**. 
 
 ## Seminar Overview
 
@@ -31,7 +31,6 @@ The accompanying Jupyter notebook (`autoencoders.ipynb`) explores these architec
 
 ## Useful Links
 
-- **t-SNE** (scikit-learn): https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html
-- **MNIST** dataset: http://yann.lecun.com/exdb/mnist/
-- Bank, D., Koenigstein, N., Giryes, R. (2023). **Autoencoders**. In: Rokach, L., Maimon, O., Shmueli, E. (eds) Machine Learning for Data Science Handbook. Springer, Cham. https://arxiv.org/abs/1211.4246
-- https://www.jeremyjordan.me/autoencoders/
+- **t-SNE** (scikit-learn): [scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
+- **MNIST** dataset: [yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+- **Introduction to autoencoders (Jordan, 2018)**: [jeremyjordan.me/autoencoders/](https://www.jeremyjordan.me/autoencoders/)
