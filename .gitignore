@@ -631,3 +631,4 @@ seminars/data/*
 homeworks/data/*
 !homeworks/data/.gitkeep
 homeworks/solutions
+seminars/03_WGAN/weights/
