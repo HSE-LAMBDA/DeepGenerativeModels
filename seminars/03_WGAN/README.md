@@ -50,3 +50,5 @@ This seminar folder contains the materials for the third seminar of our Deep Gen
 - **CelebA (CelebFaces Attributes Dataset)**: [paperswithcode.com/dataset/celeba](https://paperswithcode.com/dataset/celeba)
 
    *CelebFaces Attributes dataset contains 202,599 face images of the size 178×218 from 10,177 celebrities, each annotated with 40 binary labels indicating facial attributes like hair color, gender and age.*
+
+   [Google Drive](https://drive.google.com/drive/folders/0B7EVK8r0v71pWEZsZE9oNnFzTm8?resourcekey=0-5BR16BdXnb8hVj6CNHKzLg)
