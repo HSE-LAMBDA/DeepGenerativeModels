@@ -41,8 +41,10 @@ This seminar folder contains the materials for the third seminar of our Deep Gen
 - **Improved Training of Wasserstein GANs (Gulrajani et al., 2017)**: [arXiv:1704.00028](https://arxiv.org/abs/1704.00028)  
 - **GAN — Wasserstein GAN & WGAN-GP (Hui, 2018)**: [jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490](https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)
 
-### General
+### WGAN-SN
 - **Spectral Normalization for GAN (Miyato et al., 2018)**: [arXiv:1802.05957](https://arxiv.org/abs/1802.05957)  
+
+### General
 - **Instance Normalization: The Missing Ingredient for Fast Stylization (Ulyanov et al., 2016)**: [arXiv:1607.08022](https://arxiv.org/abs/1607.08022v3)
 - **How Does Batch Normalization Help Optimization? (Santurkar et al., 2018)**: [arXiv:1805.11604](https://arxiv.org/abs/1805.11604)
 - **CelebA (CelebFaces Attributes Dataset)**: [paperswithcode.com/dataset/celeba](https://paperswithcode.com/dataset/celeba)
