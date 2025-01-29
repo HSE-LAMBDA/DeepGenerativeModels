@@ -38,3 +38,17 @@ The project can take one of two forms:
 - If using open-source code, the project must include research beyond mere replication. Contributions should go beyond reproducing existing results by introducing enhancements, modifications, or novel interpretations.
 
 The project should be well-documented and structured to ensure clarity and reproducibility.
+
+## Project Defense
+
+The final defense will consist of the following components:
+
+1. **Team Presentation:** Each team will deliver a structured presentation of their project, covering the motivation, methodology, key results, and conclusions. The presentation should clearly highlight each team member's contribution. The approximate time for the defense is **10-15 minutes** per team.
+2. **Repository Submission:** The team must submit a well-documented GitHub repository containing:
+   - Source code.
+   - A detailed README with instructions on reproducing results.
+   - Any datasets or scripts required to run the project.
+3. **Working Solution (for Startup Projects):** If the project is a startup-style application, the team must demonstrate a working prototype or deployment of the solution.
+4. **Q&A Session:** The evaluation panel will ask questions regarding the project's implementation, results, and individual contributions.
+
+Teams should ensure their documentation is clear and that all results are reproducible.
