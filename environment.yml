@@ -13,6 +13,8 @@ dependencies:
   - pandas
   - pyarrow
   - fastparquet
+  - pillow
+  - opencv
   # Plotting
   - matplotlib
   - seaborn
