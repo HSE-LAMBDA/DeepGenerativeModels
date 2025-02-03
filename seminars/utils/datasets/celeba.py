@@ -32,6 +32,8 @@ class CelebADataset(Dataset):
         super().__init__()
         self.root_dir = root_dir
         self.transform = transform
+        
+        self.header = None
 
         # The unzipped folder will be <root_dir>/img_align_celeba
         self.dataset_folder = os.path.join(root_dir, "img_align_celeba")
@@ -64,7 +66,6 @@ class CelebADataset(Dataset):
 
         # First line has the number of images, second line has the attribute names
         # The rest lines each correspond to one image
-        header = None
         for i, line in enumerate(lines):
             # line might have variable spaces, so split robustly
             line = re.sub(r"\s+", " ", line.strip())
@@ -72,7 +73,7 @@ class CelebADataset(Dataset):
                 continue  # number of images
             elif i == 1:
                 # header line with attribute names
-                header = line.split(" ")
+                self.header = line.split(" ")
             else:
                 parts = line.split(" ")
                 filename = parts[0]
