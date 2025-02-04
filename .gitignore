@@ -632,5 +632,5 @@ homeworks/data/*
 !homeworks/data/.gitkeep
 homeworks/solutions
 seminars/03_WGAN/weights/
-seminars/04_CycleGAN-and-Img2Img/weights/CycleGAN/*
-!seminars/04_CycleGAN-and-Img2Img/weights/CycleGAN/.gitkeep
+seminars/04_Image-to-Image/weights/CycleGAN/*
+!seminars/04_Image-to-Image/weights/CycleGAN/.gitkeep
