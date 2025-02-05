@@ -20,6 +20,7 @@ dependencies:
   - seaborn
   # Machine learning
   - scikit-learn
+  - catboost
   # Deep Learning
   - pytorch::pytorch
   - torchvision 
