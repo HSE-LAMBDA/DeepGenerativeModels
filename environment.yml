@@ -25,6 +25,7 @@ dependencies:
   - pytorch::pytorch
   - torchvision 
   - torchaudio
+  - pyro-ppl
   # Jupyter Environment
   - ipykernel
   - jupyterlab
