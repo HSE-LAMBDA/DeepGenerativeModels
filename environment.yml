@@ -26,6 +26,8 @@ dependencies:
   - torchvision 
   - torchaudio
   - pyro-ppl
+  - pytorch-lightning
+  - tensorboard
   # Jupyter Environment
   - ipykernel
   - jupyterlab
