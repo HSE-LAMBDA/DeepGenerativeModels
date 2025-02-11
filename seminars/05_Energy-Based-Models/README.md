@@ -1,21 +1,35 @@
-# Seminar 05: Energy-Based Models
+# Seminar 05: Energy-Based Models & MCMC
 
 This seminar folder contains the materials for the fifth seminar of our Deep Generative Models course, dedicated to **Energy-Based Models (EBMs)** and their applications.
 
-This README accompanies the notebook **EBM.ipynb**, which provides an in-depth, hands-on exploration of training Deep Energy-Based Models on the MNIST dataset. The notebook illustrates practical details such as:
+This README accompanies the notebooks **EBM.ipynb** and **MCMC.ipynb**, which provide in-depth, hands-on explorations of training Deep Energy-Based Models and applying Markov Chain Monte Carlo (MCMC) methods using Pyro.
+
+## Notebooks Overview
+
+### **EBM.ipynb**
+This notebook illustrates practical details such as:
 - Implementing Contrastive Divergence with short-run MCMC (Langevin Dynamics),
 - Stabilizing training via a sampling buffer,
 - Leveraging score matching concepts,
 - Performing out-of-distribution detection with EBMs.
 
+### **MCMC.ipynb**
+This notebook explores several sampling methods in Pyro, including:
+- **Rejection Sampling**
+- **Metropolis-Hastings Algorithm**
+- **Langevin Sampling (MALA)**
+- **Hamiltonian Monte Carlo (HMC)**
+- **MCMC with the No-U-Turn Sampler (NUTS)**
+
 ## Seminar Overview
 
-- **Topic**: Introduction to Energy-Based Models
+- **Topic**: Introduction to Energy-Based Models and MCMC Methods
 - **Goal**: Understand how EBMs define a (generally unnormalized) distribution through an energy function and how to train such models without direct access to the partition function. We will also explore:
   1. **Score Matching** — learning the gradient of the log-density without explicit normalization.
   2. **Noise-Contrastive Estimation (NCE)** — reframing unsupervised density estimation as a binary classification task to bypass partition function computation.
   3. **Contrastive Divergence (CD)** — approximating gradients with short-run Markov Chain Monte Carlo (MCMC) to avoid the intractable partition function.
   4. **Advanced MCMC Methods** (e.g., **SGLD**, **AIS**) and sampling buffer tricks to stabilize and speed up training.
+  5. **Pyro for MCMC** — Implementing probabilistic inference with advanced MCMC algorithms.
 
 ## Key Concepts
 
@@ -37,12 +51,16 @@ This README accompanies the notebook **EBM.ipynb**, which provides an in-depth, 
 
 5. **Sampling & MCMC**  
    - **Langevin Dynamics**: Iteratively refines samples with gradient steps + noise to approximate draws from the EBM.  
-   - **Sampling Buffers**: Storing MCMC states between training steps can reduce the need for full re-initialization and stabilize learning.
+   - **Sampling Buffers**: Storing MCMC states between training steps can reduce the need for full re-initialization and stabilize learning.  
+   - **Metropolis-Hastings Algorithm**: A Markov Chain Monte Carlo method for generating samples from complex distributions.
+   - **Hamiltonian Monte Carlo (HMC)**: Uses Hamiltonian dynamics to propose new states, improving exploration.
+   - **No-U-Turn Sampler (NUTS)**: An adaptive variant of HMC that auto-tunes step sizes for better efficiency.
 
 6. **Applications**  
    - **Generative Modeling**: Learning a joint distribution over high-dimensional data (images, etc.).  
    - **Out-of-Distribution Detection**: EBMs can indicate whether a sample falls off the learned data manifold.  
-   - **Energy-Based Classifiers**: A unified framework to handle both classification and anomaly detection.
+   - **Energy-Based Classifiers**: A unified framework to handle both classification and anomaly detection.  
+   - **Probabilistic Inference with Pyro**: Leveraging MCMC to perform Bayesian inference.
 
 ## Useful Links
 
