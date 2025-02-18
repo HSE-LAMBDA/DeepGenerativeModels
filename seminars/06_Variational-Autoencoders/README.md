@@ -23,24 +23,24 @@ This README accompanies two notebooks:
 1. **Variational Inference & ELBO**  
    - **Challenge**: Direct computation of $p(\mathbf{z} \mid \mathbf{x})$ is intractable due to high-dimensional integration.
    - **Solution**: Approximate the posterior with $q(\mathbf{z} \mid \mathbf{x})$ and maximize the Evidence Lower Bound (ELBO):
-     $$
+     ```math
      \log p(\mathbf{x}) \geq \mathbb{E}_{q(\mathbf{z} \mid \mathbf{x})} \left[\log p(\mathbf{x} \mid \mathbf{z})\right] - D_{KL}\left(q(\mathbf{z} \mid \mathbf{x}) \parallel p(\mathbf{z})\right)
-     $$
+     ```
    - This balances reconstruction accuracy with latent space regularization.
 
 2. **Reparameterization Trick**  
    - Enables backpropagation through the stochastic sampling process by expressing $\mathbf{z}$ as:
-     $$
+     ```math
      \mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}, \quad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
-     $$
+     ```
    - This reformulation is essential for efficient gradient-based optimization.
 
 3. **KL Divergence & β-VAE**  
    - **KL Divergence**: Regularizes the latent distribution $q(\mathbf{z} \mid \mathbf{x})$ by minimizing its divergence from the prior $p(\mathbf{z})$, typically a standard normal distribution.
    - **β-VAE**: Introduces a hyperparameter $\beta$ to scale the KL divergence term:
-     $$
+     ```math
      \mathcal{L}_{\beta\text{-VAE}} = \text{Reconstruction Loss} + \beta \cdot D_{KL}
-     $$
+     ```
      - $\beta = 1$ recovers the standard VAE.
      - $\beta > 1$ encourages a more disentangled latent space.
 
