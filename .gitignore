@@ -635,3 +635,6 @@ seminars/03_WGAN/weights/
 seminars/04_Image-to-Image/weights/CycleGAN/*
 !seminars/04_Image-to-Image/weights/CycleGAN/.gitkeep
 notes
+seminars/07_alpha-WGAN/cfg.yaml
+seminars/07_alpha-WGAN/checkpoints
+seminars/07_alpha-WGAN/alpha-WGAN_trained-16x16.ipynb
