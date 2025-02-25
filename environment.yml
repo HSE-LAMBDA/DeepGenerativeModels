@@ -22,10 +22,7 @@ dependencies:
   - scikit-learn
   - catboost
   # Deep Learning
-  - pytorch::pytorch
-  - torchvision 
-  - torchaudio
-  - pyro-ppl
+  - pyro-ppl 
   - pytorch-lightning
   - tensorboard
   # Jupyter Environment
@@ -33,4 +30,5 @@ dependencies:
   - jupyterlab
   - jupyter
   - ipywidgets
-  - nb_conda_kernels
+  - pip:
+    - comet-ml
