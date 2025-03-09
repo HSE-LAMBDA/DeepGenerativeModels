@@ -1,7 +1,6 @@
 """
 Implements various flows.
-Each flow is invertible so it can be forward()ed and backward()ed.
-Notice that backward() is not backward as in backprop but simply inversion.
+Each flow is invertible so it can be forward()ed and inverse()ed.
 Each flow also outputs its log det J "regularization"
 
 Reference:
@@ -33,122 +32,111 @@ https://arxiv.org/abs/1912.02762
 (review paper)
 """
 
-import numpy as np
 import torch
-import torch.nn.functional as F
 from torch import nn
 
 from nflib.nets import LeafParam, MLP, ARMLP
 
 class AffineConstantFlow(nn.Module):
-    """ 
-    Scales + Shifts the flow by (learned) constants per dimension.
-    In NICE paper there is a Scaling layer which is a special case of this where t is None
     """
-    def __init__(self, dim, scale=True, shift=True):
+    Scales + Shifts the flow by (learned) constants per dimension.
+    In the NICE paper, the scaling layer is a special case of this when t is None.
+    """
+    def __init__(self, dim: int, scale: bool = True, shift: bool = True):
         super().__init__()
-        self.s = nn.Parameter(torch.randn(1, dim, requires_grad=True)) if scale else None
-        self.t = nn.Parameter(torch.randn(1, dim, requires_grad=True)) if shift else None
+        self.s = nn.Parameter(torch.randn(1, dim)) if scale else None
+        self.t = nn.Parameter(torch.randn(1, dim)) if shift else None
         
-    def forward(self, x):
-        s = self.s if self.s is not None else x.new_zeros(x.size())
-        t = self.t if self.t is not None else x.new_zeros(x.size())
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        s = self.s if self.s is not None else torch.zeros_like(x)
+        t = self.t if self.t is not None else torch.zeros_like(x)
         z = x * torch.exp(s) + t
         log_det = torch.sum(s, dim=1)
         return z, log_det
     
-    def backward(self, z):
-        s = self.s if self.s is not None else z.new_zeros(z.size())
-        t = self.t if self.t is not None else z.new_zeros(z.size())
+    def inverse(self, z: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        s = self.s if self.s is not None else torch.zeros_like(z)
+        t = self.t if self.t is not None else torch.zeros_like(z)
         x = (z - t) * torch.exp(-s)
         log_det = torch.sum(-s, dim=1)
         return x, log_det
 
-
 class ActNorm(AffineConstantFlow):
     """
-    Really an AffineConstantFlow but with a data-dependent initialization,
-    where on the very first batch we clever initialize the s,t so that the output
-    is unit gaussian. As described in Glow paper.
+    Affine constant flow with data-dependent initialization, as described in the Glow paper.
     """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.data_dep_init_done = False
     
-    def forward(self, x):
-        # first batch is used for init
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        # Use the first batch to initialize s and t so that the output is unit Gaussian.
         if not self.data_dep_init_done:
-            assert self.s is not None and self.t is not None # for now
+            assert self.s is not None and self.t is not None, "ActNorm requires both scale and shift."
             self.s.data = (-torch.log(x.std(dim=0, keepdim=True))).detach()
             self.t.data = (-(x * torch.exp(self.s)).mean(dim=0, keepdim=True)).detach()
             self.data_dep_init_done = True
         return super().forward(x)
 
-
 class AffineHalfFlow(nn.Module):
     """
-    As seen in RealNVP, affine autoregressive flow (z = x * exp(s) + t), where half of the 
-    dimensions in x are linearly scaled/transfromed as a function of the other half.
-    Which half is which is determined by the parity bit.
-    - RealNVP both scales and shifts (default)
-    - NICE only shifts
+    Affine autoregressive flow: half of the dimensions in x are transformed as a function of the other half.
     """
-    def __init__(self, dim, parity, net_class=MLP, nh=24, scale=True, shift=True):
+    def __init__(self, dim: int, parity: bool, net_class=MLP, nh: int = 24, scale: bool = True, shift: bool = True):
         super().__init__()
         self.dim = dim
         self.parity = parity
-        self.s_cond = lambda x: x.new_zeros(x.size(0), self.dim // 2)
-        self.t_cond = lambda x: x.new_zeros(x.size(0), self.dim // 2)
+        self.s_cond = lambda x: torch.zeros(x.size(0), self.dim // 2, device=x.device, dtype=x.dtype)
+        self.t_cond = lambda x: torch.zeros(x.size(0), self.dim // 2, device=x.device, dtype=x.dtype)
         if scale:
             self.s_cond = net_class(self.dim // 2, self.dim // 2, nh)
         if shift:
             self.t_cond = net_class(self.dim // 2, self.dim // 2, nh)
         
-    def forward(self, x):
-        x0, x1 = x[:,::2], x[:,1::2]
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        x0, x1 = x[:, ::2], x[:, 1::2]
         if self.parity:
             x0, x1 = x1, x0
         s = self.s_cond(x0)
         t = self.t_cond(x0)
-        z0 = x0 # untouched half
-        z1 = torch.exp(s) * x1 + t # transform this half as a function of the other
+        z0 = x0
+        z1 = torch.exp(s) * x1 + t
         if self.parity:
             z0, z1 = z1, z0
         z = torch.cat([z0, z1], dim=1)
         log_det = torch.sum(s, dim=1)
         return z, log_det
     
-    def backward(self, z):
-        z0, z1 = z[:,::2], z[:,1::2]
+    def inverse(self, z: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        z0, z1 = z[:, ::2], z[:, 1::2]
         if self.parity:
             z0, z1 = z1, z0
         s = self.s_cond(z0)
         t = self.t_cond(z0)
-        x0 = z0 # this was the same
-        x1 = (z1 - t) * torch.exp(-s) # reverse the transform on this half
+        x0 = z0
+        x1 = (z1 - t) * torch.exp(-s)
         if self.parity:
             x0, x1 = x1, x0
         x = torch.cat([x0, x1], dim=1)
         log_det = torch.sum(-s, dim=1)
         return x, log_det
 
-
 class SlowMAF(nn.Module):
-    """ 
-    Masked Autoregressive Flow, slow version with explicit networks per dim
     """
-    def __init__(self, dim, parity, net_class=MLP, nh=24):
+    Masked Autoregressive Flow (slow version) with an explicit network per input dimension.
+    """
+    def __init__(self, dim: int, parity: bool, net_class=MLP, nh: int = 24):
         super().__init__()
         self.dim = dim
         self.layers = nn.ModuleDict()
-        self.layers[str(0)] = LeafParam(2)
+        self.layers["0"] = LeafParam(2)
         for i in range(1, dim):
             self.layers[str(i)] = net_class(i, 2, nh)
         self.order = list(range(dim)) if parity else list(range(dim))[::-1]
         
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         z = torch.zeros_like(x)
-        log_det = torch.zeros(x.size(0))
+        log_det = torch.zeros(x.size(0), device=x.device, dtype=x.dtype)
         for i in range(self.dim):
             st = self.layers[str(i)](x[:, :i])
             s, t = st[:, 0], st[:, 1]
@@ -156,9 +144,9 @@ class SlowMAF(nn.Module):
             log_det += s
         return z, log_det
 
-    def backward(self, z):
+    def inverse(self, z: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         x = torch.zeros_like(z)
-        log_det = torch.zeros(z.size(0))
+        log_det = torch.zeros(z.size(0), device=z.device, dtype=z.dtype)
         for i in range(self.dim):
             st = self.layers[str(i)](x[:, :i])
             s, t = st[:, 0], st[:, 1]
@@ -167,93 +155,90 @@ class SlowMAF(nn.Module):
         return x, log_det
 
 class MAF(nn.Module):
-    """ Masked Autoregressive Flow that uses a MADE-style network for fast forward """
-    
-    def __init__(self, dim, parity, net_class=ARMLP, nh=24):
+    """
+    Masked Autoregressive Flow using a MADE-style network for fast parallel density estimation.
+    """
+    def __init__(self, dim: int, parity: bool, net_class=ARMLP, nh: int = 24):
         super().__init__()
         self.dim = dim
-        self.net = net_class(dim, dim*2, nh)
+        self.net = net_class(dim, dim * 2, nh)
         self.parity = parity
 
-    def forward(self, x):
-        # here we see that we are evaluating all of z in parallel, so density estimation will be fast
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         st = self.net(x)
         s, t = st.split(self.dim, dim=1)
         z = x * torch.exp(s) + t
-        # reverse order, so if we stack MAFs correct things happen
         z = z.flip(dims=(1,)) if self.parity else z
         log_det = torch.sum(s, dim=1)
         return z, log_det
     
-    def backward(self, z):
-        # we have to decode the x one at a time, sequentially
+    def inverse(self, z: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         x = torch.zeros_like(z)
-        log_det = torch.zeros(z.size(0))
+        log_det = torch.zeros(z.size(0), device=z.device, dtype=z.dtype)
         z = z.flip(dims=(1,)) if self.parity else z
         for i in range(self.dim):
-            st = self.net(x.clone()) # clone to avoid in-place op errors if using IAF
+            st = self.net(x.clone())
             s, t = st.split(self.dim, dim=1)
             x[:, i] = (z[:, i] - t[:, i]) * torch.exp(-s[:, i])
             log_det += -s[:, i]
         return x, log_det
 
 class IAF(MAF):
+    """
+    Inverse Autoregressive Flow (IAF): swaps forward and inverse so that sampling is fast.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        """
-        reverse the flow, giving an Inverse Autoregressive Flow (IAF) instead, 
-        where sampling will be fast but density estimation slow
-        """
-        self.forward, self.backward = self.backward, self.forward
-
+        # Swap the roles of forward and inverse
+        self.forward, self.inverse = self.inverse, self.forward
 
 class Invertible1x1Conv(nn.Module):
-    """ 
-    As introduced in Glow paper.
+    """
+    Invertible 1x1 Convolution layer as introduced in the Glow paper.
     """
     
-    def __init__(self, dim):
+    def __init__(self, dim: int):
         super().__init__()
         self.dim = dim
         Q = torch.nn.init.orthogonal_(torch.randn(dim, dim))
-        P, L, U = torch.lu_unpack(*Q.lu())
-        self.P = P # remains fixed during optimization
-        self.L = nn.Parameter(L) # lower triangular portion
-        self.S = nn.Parameter(U.diag()) # "crop out" the diagonal to its own parameter
-        self.U = nn.Parameter(torch.triu(U, diagonal=1)) # "crop out" diagonal, stored in S
+        # Use new LU factorization API
+        LU, pivots = torch.linalg.lu_factor(Q)
+        P, L, U = torch.lu_unpack(LU, pivots)
+        self.register_buffer("P", P)
+        self.L = nn.Parameter(L)
+        self.S = nn.Parameter(U.diag())
+        self.U = nn.Parameter(torch.triu(U, diagonal=1))
 
-    def _assemble_W(self):
-        """ assemble W from its pieces (P, L, U, S) """
-        L = torch.tril(self.L, diagonal=-1) + torch.diag(torch.ones(self.dim))
+    def _assemble_W(self) -> torch.Tensor:
+        L = torch.tril(self.L, diagonal=-1) + torch.diag(torch.ones(self.dim, device=self.L.device, dtype=self.L.dtype))
         U = torch.triu(self.U, diagonal=1)
         W = self.P @ L @ (U + torch.diag(self.S))
         return W
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         W = self._assemble_W()
         z = x @ W
         log_det = torch.sum(torch.log(torch.abs(self.S)))
         return z, log_det
 
-    def backward(self, z):
+    def inverse(self, z: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         W = self._assemble_W()
-        W_inv = torch.inverse(W)
+        W_inv = torch.linalg.inv(W)
         x = z @ W_inv
         log_det = -torch.sum(torch.log(torch.abs(self.S)))
         return x, log_det
 
-# ------------------------------------------------------------------------
-
 class NormalizingFlow(nn.Module):
-    """ A sequence of Normalizing Flows is a Normalizing Flow """
-
+    """
+    A sequence of normalizing flows.
+    """
     def __init__(self, flows):
         super().__init__()
         self.flows = nn.ModuleList(flows)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> tuple[list, torch.Tensor]:
         m, _ = x.shape
-        log_det = torch.zeros(m)
+        log_det = torch.zeros(m, device=x.device, dtype=x.dtype)
         zs = [x]
         for flow in self.flows:
             x, ld = flow.forward(x)
@@ -261,34 +246,35 @@ class NormalizingFlow(nn.Module):
             zs.append(x)
         return zs, log_det
 
-    def backward(self, z):
+    def inverse(self, z: torch.Tensor) -> tuple[list, torch.Tensor]:
         m, _ = z.shape
-        log_det = torch.zeros(m)
+        log_det = torch.zeros(m, device=z.device, dtype=z.dtype)
         xs = [z]
         for flow in self.flows[::-1]:
-            z, ld = flow.backward(z)
+            z, ld = flow.inverse(z)
             log_det += ld
             xs.append(z)
         return xs, log_det
 
 class NormalizingFlowModel(nn.Module):
-    """ A Normalizing Flow Model is a (prior, flow) pair """
-    
+    """
+    A Normalizing Flow Model is a (prior, flow) pair.
+    """
     def __init__(self, prior, flows):
         super().__init__()
         self.prior = prior
         self.flow = NormalizingFlow(flows)
     
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> tuple[list, torch.Tensor, torch.Tensor]:
         zs, log_det = self.flow.forward(x)
         prior_logprob = self.prior.log_prob(zs[-1]).view(x.size(0), -1).sum(1)
         return zs, prior_logprob, log_det
 
-    def backward(self, z):
-        xs, log_det = self.flow.backward(z)
+    def inverse(self, z: torch.Tensor) -> tuple[list, torch.Tensor]:
+        xs, log_det = self.flow.inverse(z)
         return xs, log_det
     
-    def sample(self, num_samples):
+    def sample(self, num_samples: int) -> list:
         z = self.prior.sample((num_samples,))
-        xs, _ = self.flow.backward(z)
+        xs, _ = self.flow.inverse(z)
         return xs
