@@ -15,10 +15,7 @@ This seminar folder contains the materials for the ninth seminar of our Deep Gen
 
 1. **Normalizing Flows**  
    - **Definition**: A sequence of invertible transformations that convert a simple base distribution into a complex target distribution by using the change-of-variables formula.
-   - **Mathematical Framework**:  
-     $$
-     \log p(z_K) = \log p(z_0) - \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f_i}{\partial z_{i-1}} \right) \right|
-     $$
+   - **Mathematical Framework**: $\log p(z_K) = \log p(z_0) - \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f_i}{\partial z_{i-1}} \right) \right|$
    - **Significance**: This framework enables exact likelihood evaluation and flexible modeling of complex data distributions.
 
 2. **Flow Transformations and Layers**  
@@ -28,10 +25,7 @@ This seminar folder contains the materials for the ninth seminar of our Deep Gen
    - **Coupling Layers**: Enable efficient computation of the Jacobian determinant by transforming part of the input conditioned on the rest.
 
 3. **Training and Optimization**  
-   - **Loss Function**: The negative log-likelihood (NLL) is minimized:
-     $$
-     \text{loss} = -\sum \left( \log p(z_0) - \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f_i}{\partial z_{i-1}} \right) \right| \right)
-     $$
+   - **Loss Function**: The negative log-likelihood (NLL) is minimized: $\text{loss} = -\sum \left( \log p(z_0) - \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f_i}{\partial z_{i-1}} \right) \right| \right)$
    - **Evaluation Strategy**: Analysis of both the forward (data → latent) and inverse (latent → data) mappings, along with visual inspection of the evolving density and grid warp.
 
 4. **Visualization and Analysis**  
