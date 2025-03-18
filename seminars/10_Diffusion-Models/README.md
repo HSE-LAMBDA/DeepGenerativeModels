@@ -48,3 +48,4 @@ This seminar folder contains the materials for the tenth seminar of our Deep Gen
 - **Estimation of Non-Normalized Statistical Models by Score Matching (Hyvärinen, 2005)**: [JMLR](https://jmlr.org/papers/v6/hyvarinen05a.html)
 - **Sliced Score Matching: A Scalable Approach to Density and Score Estimation (Song et al., 2019)**: [arXiv:1905.07088](https://arxiv.org/abs/1905.07088)
 - **Generative Modeling by Estimating Gradients of the Data Distribution (Song et al., 2019)**: [arXiv:1907.05600](https://arxiv.org/abs/1907.05600)
+- **What are Diffusion Models? (Weng, 2021)**: [lilianweng.github.io](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/)
