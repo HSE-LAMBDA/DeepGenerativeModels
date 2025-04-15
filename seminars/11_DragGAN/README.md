@@ -43,3 +43,13 @@ This seminar folder contains materials for the eleventh seminar in our Deep Gene
 - **StyleGAN2: Analyzing and Improving the Image Quality of StyleGAN (Karras et al., 2020)**: [arXiv:1912.04958](https://arxiv.org/abs/1912.04958)
 - **GAN Inversion: A Survey (Xia et al., 2022)**: [arXiv:2101.05278](https://arxiv.org/abs/2101.05278)
 - **Real-Time High-Resolution Background Matting (Sengupta et al., 2020)**: [arXiv:2011.02225](https://arxiv.org/abs/2011.02225)
+- **LoRA: Low-Rank Adaptation of Large Language Models (Hu et al., 2021)** [arXiv:2106.09685](https://arxiv.org/abs/2106.09685)
+- More on GAN inversion: https://github.com/AleKY-G/Awesome-GAN-Inversion
+
+### Code
+- **DragGAN official implementation**: [https://github.com/XingangPan/DragGAN](https://github.com/XingangPan/DragGAN)
+- **DragGAN unofficial implementation (more intuitive)**: [https://github.com/OpenGVLab/DragGAN](https://github.com/OpenGVLab/DragGAN)
+- **DragDiffusion official implementation**: [https://github.com/Yujun-Shi/DragDiffusion](https://github.com/Yujun-Shi/DragDiffusion)
+- **DDIM Denoising**: https://huggingface.co/docs/diffusers/v0.16.0/en/api/schedulers/ddim
+- **DDIM Inversion**: https://huggingface.co/learn/diffusion-course/en/unit4/2
+- LoRA finetuning brief explanation with examples from HF: https://huggingface.co/docs/diffusers/en/training/lora
