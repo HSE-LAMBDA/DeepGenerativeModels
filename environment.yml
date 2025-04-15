@@ -7,6 +7,7 @@ dependencies:
   - pip
   - tqdm
   - gdown
+  - joblib
   # Data Analysis
   - scipy
   - numpy
@@ -25,6 +26,12 @@ dependencies:
   - pyro-ppl 
   - pytorch-lightning
   - tensorboard
+  - transformers
+  - datasets
+  # LLM
+  - langchain
+  - langchain-community
+  - langchain_huggingface
   # Jupyter Environment
   - ipykernel
   - jupyterlab
@@ -32,3 +39,4 @@ dependencies:
   - ipywidgets
   - pip:
     - comet-ml
+
