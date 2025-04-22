@@ -24,7 +24,7 @@ This folder contains materials for the thirteenth seminar in our **Deep Generat
 
 ## Useful Links  
 
-### Documentation & Tutorials  
+### Code & Docs
 - **Transformers API**: <https://huggingface.co/docs/transformers/index>  
 - **Trainer API**: <https://huggingface.co/docs/transformers/en/trainer>  
 - **LangChain Docs**: <https://python.langchain.com/>  
